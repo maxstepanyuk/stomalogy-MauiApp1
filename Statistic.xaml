@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Statistic"
+             Title="Статистика">
+    <VerticalStackLayout>
+        <Button Text="Назад" FontSize="22" BorderWidth="1" Clicked="Back"  Margin="50, 10, 50, 10"/>
+        <HorizontalStackLayout Margin="50, 10, 50, 10">
+            <Label 
+                Text="Виберіть дати для статистики"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <DatePicker x:Name="datePicker1" Format="d"/>
+            <DatePicker x:Name="datePicker2" Format="d"/>
+        </HorizontalStackLayout>
+        <VerticalStackLayout x:Name="stack" Margin="50, 10, 50, 10">
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
