@@ -28,11 +28,11 @@ public partial class MainPage : ContentPage
     private void PickerSelectedIndexChanged(object sender, System.EventArgs e)
     {
         UpdateData();
-        
+
     }
-    private void UpdateData() 
+    private void UpdateData()
     {
-        
+
         grid.Clear();
         using (BaseContext context = new BaseContext())
         {
@@ -72,30 +72,30 @@ public partial class MainPage : ContentPage
                            join c in context.Pats on u.PatientId equals c.Id
                            join v in context.Cabs on u.CabinetId equals v.Id
                            join w in context.Reasons on u.ReasonId equals w.Id
-                           select new 
-                            {
-                                Id = u.Id,
-                                Time = u.Time,
-                                Cabinet = v.Name,
-                                Tooth = u.Tooth,
-                                Reason = w.Name,
-                                Description = u.Description,
-                                Name = c.Name,
-                                Phone = c.Phone
+                           select new
+                           {
+                               Id = u.Id,
+                               Time = u.Time,
+                               Cabinet = v.Name,
+                               Tooth = u.Tooth,
+                               Reason = w.Name,
+                               Description = u.Description,
+                               Name = c.Name,
+                               Phone = c.Phone
 
-                            };
+                           };
 
                 TapGestureRecognizer tapGesture = new TapGestureRecognizer
                 {
                     NumberOfTapsRequired = 2
                 };
-          
+
                 int numberApp = 1;
                 foreach (var app in apps)
                 {
-                    String someText = app.Id + ", " + app.Time.ToString() + ", " + app.Cabinet.ToString() + ", " + app.Tooth.ToString() + ",\n"+ app.Reason.ToString() + ",\n" + app.Description.ToString() + ",\n" + app.Name.ToString() + ",\n" + app.Phone.ToString();
+                    String someText = app.Id + ", " + app.Time.ToString() + ", " + app.Cabinet.ToString() + ", " + app.Tooth.ToString() + ",\n" + app.Reason.ToString() + ",\n" + app.Description.ToString() + ",\n" + app.Name.ToString() + ",\n" + app.Phone.ToString();
                     label = new Label { Text = someText };
-                    tapGesture.Tapped += UpdateDelete; 
+                    tapGesture.Tapped += UpdateDelete;
                     label.GestureRecognizers.Add(tapGesture);
                     label.BackgroundColor = Colors.AliceBlue;
                     label.HorizontalTextAlignment = TextAlignment.Center;
@@ -113,7 +113,9 @@ public partial class MainPage : ContentPage
         string text = ((Label)sender).Text;
         string[] words = text.Split(new char[] { ',' });
         App.Current.MainPage = new NavigationPage(new UpdateDelete(words[0]));
-        
+        //Користувач натискає двічі на Label, що містить текст: "123, 10:30, Cabinet A, 2, Reason A, Description A, John Doe, 555-1234".
+        //Текст Label розбивається на частини, і витягується перший елемент: "123".
+        //Додаток переходить на нову сторінку UpdateDelete, передаючи Id зустрічі "123" у конструктор.
     }
     private void Analytics(object sender, System.EventArgs e)
     {
